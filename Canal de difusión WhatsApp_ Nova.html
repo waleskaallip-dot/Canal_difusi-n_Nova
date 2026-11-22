@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Honduras ⚡ — Canal de Difusión Oficial</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            nova: {
+              electric: '#00E5A0',
+              teal: '#00B884',
+              dark: '#090E17',
+              cardDark: '#131C2B',
+              bubbleDark: '#162235',
+              bubbleLight: '#FFFFFF',
+            }
+          },
+          animation: {
+            'pop': 'pop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            'slide-up': 'slideUp 0.35s ease-out forwards',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            pop: {
+              '0%': { transform: 'scale(0.8)' },
+              '50%': { transform: 'scale(1.18)' },
+              '100%': { transform: 'scale(1)' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(18px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Personalización de barras de desplazamiento dentro del teléfono */
+    .phone-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .phone-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .phone-scroll::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: 9999px;
+    }
+    .phone-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.5);
+    }
+
+    /* Patrón sutil de fondo estilo canal de mensajería */
+    .chat-bg-light {
+      background-color: #EFEAE2;
+      background-image: radial-gradient(rgba(0, 184, 132, 0.08) 1px, transparent 1px),
+                        radial-gradient(rgba(15, 23, 42, 0.04) 1px, #EFEAE2 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+    }
+
+    .chat-bg-dark {
+      background-color: #0B121D;
+      background-image: radial-gradient(rgba(0, 229, 160, 0.07) 1px, transparent 1px),
+                        radial-gradient(rgba(255, 255, 255, 0.025) 1px, #0B121D 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+    }
+  </style>
+</head>
+<body class="h-[100dvh] bg-slate-950 text-slate-100 font-sans antialiased flex items-center justify-center sm:p-4 overflow-hidden selection:bg-emerald-400 selection:text-slate-950">
+
+  <!-- =====================================================================
+       INTERFAZ DEL CANAL DE DIFUSIÓN NOVA HONDURAS ⚡
+  ====================================================================== -->
+  <main id="phoneFrame" class="dark relative w-full max-w-[440px] h-full sm:h-[92dvh] sm:max-h-[860px] sm:rounded-3xl sm:border sm:border-slate-800/90 sm:shadow-2xl overflow-hidden flex flex-col bg-[#0B121D] transition-colors duration-300">
+
+      <!-- =================================================================
+           CABECERA DEL CANAL DE DIFUSIÓN
+      ================================================================== -->
+      <header class="relative z-20 px-3 py-3 bg-white/95 dark:bg-[#111B2E]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/90 flex items-center justify-between gap-2 transition-colors">
+        <!-- Botón atrás + Avatar + Nombre del Canal -->
+        <div class="flex items-center gap-2 min-w-0 flex-1 cursor-pointer group" onclick="toggleChannelInfo(true)">
+          <div class="p-1.5 rounded-full text-slate-600 dark:text-slate-300 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </div>
+
+          <!-- Avatar Oficial Nova -->
+          <div class="relative shrink-0">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-slate-950 via-slate-900 to-emerald-950 border-2 border-emerald-400 flex items-center justify-center shadow-md">
+              <span class="font-extrabold text-sm tracking-tight text-white">N<span class="text-emerald-400">⚡</span></span>
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-white dark:border-[#111B2E]"></span>
+          </div>
+
+          <!-- Nombre y seguidores -->
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-1">
+              <h1 class="font-bold text-sm text-slate-900 dark:text-white truncate">Nova Honduras ⚡</h1>
+              <!-- Insignia de Verificación Oficial -->
+              <svg class="w-4 h-4 text-emerald-500 shrink-0" viewBox="0 0 24 24" fill="currentColor" title="Canal Oficial Verificado">
+                <path d="M12 2L14.8 4.2L18.3 3.9L19.4 7.2L22.3 9.2L21.3 12.6L22.3 16L19.4 18L18.3 21.3L14.8 21L12 23.2L9.2 21L5.7 21.3L4.6 18L1.7 16L2.7 12.6L1.7 9.2L4.6 7.2L5.7 3.9L9.2 4.2L12 2ZM10.5 16.2L17 9.7L15.6 8.3L10.5 13.4L8.4 11.3L7 12.7L10.5 16.2Z" />
+              </svg>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+              Canal oficial 🇭🇳 • <span id="headerFollowersCount">14.8 mil</span> seguidores
+            </p>
+          </div>
+        </div>
+
+        <!-- Botones de Acción Rápida en Cabecera (Seguir + Info/Opciones) -->
+        <div class="flex items-center gap-1 shrink-0">
+          <button id="btnFollow" onclick="toggleFollow()" class="px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-emerald-400 border border-slate-300 dark:border-emerald-500/30">
+            Siguiendo
+          </button>
+          <button id="btnTheme" onclick="toggleTheme()" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer" title="Cambiar modo claro/oscuro">
+            <svg id="themeIconSun" class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg id="themeIconMoon" class="w-4 h-4 text-slate-700 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+          <button id="btnBell" onclick="toggleNotifications()" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer" title="Notificaciones">
+            <svg id="bellIconOn" class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+            <svg id="bellIconOff" class="w-4 h-4 text-slate-400 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728A9 9 0 015.636 5.636" />
+            </svg>
+          </button>
+          <button onclick="toggleChannelInfo(true)" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer" title="Información del canal">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Toast flotante para retroalimentación -->
+      <div id="phoneToast" class="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 z-40 opacity-0 transition-all duration-300 transform -translate-y-2">
+        <div id="phoneToastText" class="px-3.5 py-1.5 rounded-full bg-slate-900/95 dark:bg-emerald-400 text-white dark:text-slate-950 text-xs font-semibold shadow-xl whitespace-nowrap">
+          Notificaciones activadas
+        </div>
+      </div>
+
+      <!-- =================================================================
+           FEED DE PUBLICACIONES DEL CANAL (SOLO LECTURA + REACCIONES)
+      ================================================================== -->
+      <div id="chatFeed" class="flex-1 overflow-y-auto phone-scroll chat-bg-dark px-3.5 py-4 space-y-4 transition-colors duration-300">
+
+        <!-- Aviso de privacidad estilo canal oficial -->
+        <div class="flex justify-center">
+          <div class="max-w-[92%] bg-white/90 dark:bg-[#131E31]/90 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800 rounded-2xl px-3.5 py-2.5 text-center shadow-sm">
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              🔒 <strong class="text-slate-800 dark:text-white">Canal oficial verificado.</strong> Aquí recibirás lanzamientos exclusivos, precios en Lempiras y puntos de carga en San Pedro Sula. Tu número de teléfono permanece privado.
+            </p>
+          </div>
+        </div>
+
+        <!-- Etiqueta de fecha -->
+        <div class="flex justify-center">
+          <span class="px-3 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-slate-200/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-400 shadow-xs">
+            Hoy
+          </span>
+        </div>
+
+        <!-- Contenedor dinámico donde se renderizan todas las publicaciones -->
+        <div id="postsContainer" class="space-y-4 pb-2"></div>
+
+      </div>
+
+      <!-- =================================================================
+           BARRA INFERIOR UNIDIRECCIONAL (SIN CAJA DE TEXTO PARA CLIENTES)
+      ================================================================== -->
+      <footer class="relative z-20 bg-white/95 dark:bg-[#111B2E]/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-3.5 py-3 transition-colors">
+        <div class="flex items-center justify-between gap-2 bg-slate-100 dark:bg-[#0B121D] border border-slate-200/90 dark:border-slate-800 rounded-2xl px-3.5 py-2.5">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+              </svg>
+            </span>
+            <span class="text-xs font-medium text-slate-600 dark:text-slate-300 truncate">
+              Solo los administradores pueden enviar mensajes
+            </span>
+          </div>
+
+          <button id="footerMuteBtn" onclick="toggleNotifications()" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline shrink-0 cursor-pointer">
+            Silenciar
+          </button>
+        </div>
+      </footer>
+
+      <!-- =================================================================
+           MODAL DESLIZABLE: PERFIL E INFORMACIÓN DEL CANAL NOVA HONDURAS
+      ================================================================== -->
+      <div id="channelInfoModal" class="hidden absolute inset-0 z-50 bg-slate-50 dark:bg-[#0B121D] flex-col animate-slide-up overflow-y-auto phone-scroll">
+        <!-- Barra superior modal -->
+        <div class="sticky top-0 z-10 px-4 py-3 bg-white/90 dark:bg-[#111B2E]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <button onclick="toggleChannelInfo(false)" class="flex items-center gap-1.5 text-sm font-semibold text-emerald-600 dark:text-emerald-400 cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Volver al canal
+          </button>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Info del Canal</span>
+        </div>
+
+        <!-- Contenido del Perfil del Canal -->
+        <div class="p-5 space-y-5">
+          <!-- Avatar grande y título -->
+          <div class="flex flex-col items-center text-center pt-2">
+            <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-slate-950 via-slate-900 to-emerald-950 border-2 border-emerald-400 flex items-center justify-center shadow-xl shadow-emerald-500/15 mb-3">
+              <span class="font-extrabold text-3xl text-white">N<span class="text-emerald-400">⚡</span></span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Nova Honduras ⚡</h3>
+              <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L14.8 4.2L18.3 3.9L19.4 7.2L22.3 9.2L21.3 12.6L22.3 16L19.4 18L18.3 21.3L14.8 21L12 23.2L9.2 21L5.7 21.3L4.6 18L1.7 16L2.7 12.6L1.7 9.2L4.6 7.2L5.7 3.9L9.2 4.2L12 2ZM10.5 16.2L17 9.7L15.6 8.3L10.5 13.4L8.4 11.3L7 12.7L10.5 16.2Z" />
+              </svg>
+            </div>
+            <p class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">
+              Canal público • <span id="modalFollowers">14,820</span> seguidores
+            </p>
+
+            <!-- Botones rápidos -->
+            <div class="grid grid-cols-3 gap-2.5 w-full mt-4">
+              <button onclick="toggleFollow()" class="py-2.5 px-2 rounded-2xl bg-white dark:bg-[#131E31] border border-slate-200 dark:border-slate-800 flex flex-col items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-200 cursor-pointer">
+                <span class="text-emerald-500 text-base">✓</span>
+                <span id="modalFollowLabel">Siguiendo</span>
+              </button>
+              <button onclick="toggleNotifications()" class="py-2.5 px-2 rounded-2xl bg-white dark:bg-[#131E31] border border-slate-200 dark:border-slate-800 flex flex-col items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-200 cursor-pointer">
+                <span class="text-emerald-500 text-base">🔔</span>
+                <span id="modalNotifLabel">Activadas</span>
+              </button>
+              <button onclick="copyChannelLink()" class="py-2.5 px-2 rounded-2xl bg-white dark:bg-[#131E31] border border-slate-200 dark:border-slate-800 flex flex-col items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-200 cursor-pointer">
+                <span class="text-emerald-500 text-base">🔗</span>
+                <span>Compartir</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Descripción Oficial -->
+          <div class="bg-white dark:bg-[#131E31] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-2.5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Acerca de Nova Honduras</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Somos la marca internacional líder en movilidad 100% eléctrica, ahora en <strong>Honduras 🇭🇳</strong>. Diseñamos motocicletas urbanas de alto rendimiento y vehículos eléctricos inteligentes con cero emisiones y hasta un 85% de ahorro frente al combustible tradicional.
+            </p>
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs">
+              <div class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                <span>📍</span>
+                <span><strong>Showroom Principal San Pedro Sula:</strong> Ave. Circunvalación, Plaza El Pedregal.</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                <span>🏢</span>
+                <span><strong>Centro de Servicio y Carga SPS:</strong> Blvd. del Norte, Sector Río Blanco.</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                <span>🕒</span>
+                <span><strong>Horario de Atención:</strong> Lun - Sáb de 8:30 a. m. a 6:00 p. m.</span>
+              </div>
+              <div class="flex items-start gap-2 text-emerald-600 dark:text-emerald-400 font-semibold">
+                <span>🌐</span>
+                <span>www.novamotors.hn</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Catálogo Rápido -->
+          <div class="bg-white dark:bg-[#131E31] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Modelos Disponibles 2026</h4>
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70">
+              <div>
+                <p class="text-xs font-bold text-slate-900 dark:text-white">🏍️ Nova Volt-X 2026</p>
+                <p class="text-[11px] text-slate-500">120 km autonomía • Carga 110V</p>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">L 48,900</span>
+            </div>
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70">
+              <div>
+                <p class="text-xs font-bold text-slate-900 dark:text-white">🚗 Nova E-City Compact</p>
+                <p class="text-[11px] text-slate-500">250 km autonomía • A/C + Pantalla</p>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">L 349,000</span>
+            </div>
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70">
+              <div>
+                <p class="text-xs font-bold text-slate-900 dark:text-white">🛵 Scooter Nova S1</p>
+                <p class="text-[11px] text-slate-500">85 km autonomía • Batería extraíble</p>
+              </div>
+              <span class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">L 32,500</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </main>
+
+  <!-- =====================================================================
+       LÓGICA INTERACTIVA DEL CANAL DE DIFUSIÓN NOVA HONDURAS
+  ====================================================================== -->
+  <script>
+    // Estado global del canal
+    let state = {
+      isFollowing: true,
+      notificationsEnabled: true,
+      darkMode: true,
+      followers: 14820,
+      openPickerPostId: null
+    };
+
+    // Emojis disponibles en el selector rápido (+)
+    const quickEmojis = ['⚡', '🔥', '❤️', '👏', '😮', '🏍️', '🚗'];
+
+    // Publicaciones del canal de difusión (enfocadas 100% en San Pedro Sula)
+    const posts = [
+      {
+        id: 'post-1',
+        tag: 'ANUNCIO OFICIAL 🇭🇳',
+        title: '¡Nova llega oficialmente a San Pedro Sula! ⚡',
+        body: 'La revolución de la movilidad 100% eléctrica ya está en la Capital Industrial. Conoce nuestra línea de motocicletas y vehículos eléctricos diseñados para recorrer San Pedro Sula con cero gasolina, cero emisiones y máximo ahorro.',
+        visualType: null,
+        poll: null,
+        time: '09:15 a. m.',
+        views: '12.4k',
+        reactions: [
+          { emoji: '⚡', count: 842, userReacted: true },
+          { emoji: '🔥', count: 519, userReacted: false },
+          { emoji: '🇭🇳', count: 630, userReacted: false }
+        ]
+      },
+      {
+        id: 'post-2',
+        tag: 'NUEVO MODELO',
+        title: 'Conoce la nueva Nova Volt-X 2026 🏍️',
+        body: 'Ideal para moverte por toda San Pedro Sula sin gastar en combustible. Se carga en cualquier tomacorriente doméstico de 110V y recorre hasta 120 km por carga completa. ¡Disponible para entrega inmediata en nuestro showroom!',
+        visualType: 'moto',
+        poll: null,
+        time: '11:40 a. m.',
+        views: '10.9k',
+        reactions: [
+          { emoji: '🏍️', count: 715, userReacted: false },
+          { emoji: '😍', count: 488, userReacted: true },
+          { emoji: '⚡', count: 392, userReacted: false }
+        ]
+      },
+      {
+        id: 'post-3',
+        tag: 'MOVILIDAD ELÉCTRICA',
+        title: 'Nova E-City 2026: Tu próximo auto eléctrico 🚗',
+        body: 'Tecnología inteligente, aire acondicionado digital, pantalla táctil de 10.2" y carga rápida en 35 minutos. Ven a conocerlo en Ave. Circunvalación, Plaza El Pedregal, San Pedro Sula.',
+        visualType: 'car',
+        poll: null,
+        time: '02:10 p. m.',
+        views: '9.8k',
+        reactions: [
+          { emoji: '🚗', count: 612, userReacted: false },
+          { emoji: '🔥', count: 445, userReacted: false },
+          { emoji: '👏', count: 310, userReacted: false }
+        ]
+      },
+      {
+        id: 'post-4',
+        tag: 'INFRAESTRUCTURA SPS',
+        title: '¡6 puntos de carga GRATIS en San Pedro Sula! 🔌',
+        body: 'Por la compra de cualquier motocicleta o vehículo Nova recibes 1 año de carga rápida 100% gratuita en nuestra red de estaciones ubicadas en puntos estratégicos de San Pedro Sula.',
+        visualType: 'charging',
+        poll: null,
+        time: '04:05 p. m.',
+        views: '8.7k',
+        reactions: [
+          { emoji: '⚡', count: 920, userReacted: true },
+          { emoji: '🙌', count: 412, userReacted: false }
+        ]
+      },
+      {
+        id: 'post-5',
+        tag: 'ENCUESTA EXCLUSIVA',
+        title: '¿Qué modelo quieres probar primero en nuestro Test Drive de San Pedro Sula? 📅',
+        body: 'Este fin de semana tendremos pruebas de manejo gratuitas en Ave. Circunvalación (SPS). ¡Vota por tu favorito para reservar cupos!',
+        visualType: null,
+        poll: {
+          totalVotes: 2480,
+          userVotedIndex: null,
+          options: [
+            { label: '🏍️ Motocicleta Nova Volt-X 2026', votes: 1190 },
+            { label: '🚗 Vehículo Compacto Nova E-City', votes: 890 },
+            { label: '🛵 Scooter Urbano Nova S1', votes: 400 }
+          ]
+        },
+        time: '05:30 p. m.',
+        views: '8.1k',
+        reactions: [
+          { emoji: '🔥', count: 354, userReacted: false },
+          { emoji: '⚡', count: 298, userReacted: false }
+        ]
+      }
+    ];
+
+    // Genera las tarjetas visuales enriquecidas según el tipo de publicación
+    function getVisualCardHTML(type) {
+      if (type === 'moto') {
+        return `
+          <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-[#101F33] to-cyan-950 border border-cyan-400/30 my-2.5 shadow-md">
+            <!-- Fotografía integrada de la motocicleta Nova Volt-X 2026 -->
+            <div class="relative w-full h-44 bg-slate-950 overflow-hidden">
+              <img
+                src="https://www.nitro.pe/images/2019/noviembre/aston_martin_1.jpg"
+                alt="Motocicleta eléctrica Nova Volt-X 2026"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/640x360/0F172A/00E5A0?text=Nova+Volt-X+2026+⚡';"
+                class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-transparent"></div>
+              <div class="absolute top-2.5 right-2.5">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-400 text-slate-950 text-[11px] font-extrabold shadow-md">L 48,900</span>
+              </div>
+              <div class="absolute bottom-2.5 left-3.5 right-3.5">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-300 block drop-shadow">Motocicleta Eléctrica</span>
+                <h4 class="text-base font-extrabold text-white leading-tight drop-shadow">Nova Volt-X 2026</h4>
+              </div>
+            </div>
+
+            <div class="p-3.5">
+              <div class="grid grid-cols-3 gap-1.5 text-center">
+                <div class="bg-slate-950/70 rounded-lg py-2 px-1">
+                  <p class="text-[10px] text-slate-400">Autonomía</p>
+                  <p class="text-xs font-extrabold text-white">120 km</p>
+                </div>
+                <div class="bg-slate-950/70 rounded-lg py-2 px-1">
+                  <p class="text-[10px] text-slate-400">Enchufe</p>
+                  <p class="text-xs font-extrabold text-emerald-400">110V Casa</p>
+                </div>
+                <div class="bg-slate-950/70 rounded-lg py-2 px-1">
+                  <p class="text-[10px] text-slate-400">Ahorro</p>
+                  <p class="text-xs font-extrabold text-cyan-300">85% Gas</p>
+                </div>
+              </div>
+              <div class="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-cyan-200 font-medium">
+                <span>💳 Cuotas desde L 1,890/mes</span>
+                <span>📍 Showroom SPS</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (type === 'car') {
+        return `
+          <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-[#122629] to-emerald-950 border border-emerald-400/30 my-2.5 shadow-md">
+            <!-- Fotografía integrada del automóvil Nova E-City 2026 -->
+            <div class="relative w-full h-44 bg-slate-950 overflow-hidden">
+              <img
+                src="https://www.hibridosyelectricos.com/uploads/s1/49/20/40/pretende-rivalizar-con-modelos-de-gama-alta-como-un-mercedes-eqe-por-ejemplo.jpeg"
+                alt="Vehículo eléctrico Nova E-City 2026"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/640x360/0F172A/00E5A0?text=Nova+E-City+2026+⚡';"
+                class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-transparent"></div>
+              <div class="absolute top-2.5 right-2.5">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-400 text-slate-950 text-[11px] font-extrabold shadow-md">L 349,000</span>
+              </div>
+              <div class="absolute bottom-2.5 left-3.5 right-3.5">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-300 block drop-shadow">Vehículo Eléctrico Compacto</span>
+                <h4 class="text-base font-extrabold text-white leading-tight drop-shadow">Nova E-City 2026</h4>
+              </div>
+            </div>
+
+            <div class="p-3.5">
+              <div class="grid grid-cols-3 gap-1.5 text-center">
+                <div class="bg-slate-950/70 rounded-lg py-2 px-1">
+                  <p class="text-[10px] text-slate-400">Rango</p>
+                  <p class="text-xs font-extrabold text-white">250 km</p>
+                </div>
+                <div class="bg-slate-950/70 rounded-lg py-2 px-1">
+                  <p class="text-[10px] text-slate-400">Carga Rápida</p>
+                  <p class="text-xs font-extrabold text-emerald-400">35 min</p>
+                </div>
+                <div class="bg-slate-950/70 rounded-lg py-2 px-1">
+                  <p class="text-[10px] text-slate-400">Sede</p>
+                  <p class="text-xs font-extrabold text-white">San Pedro Sula</p>
+                </div>
+              </div>
+              <div class="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-emerald-200 font-medium">
+                <span>❄️ A/C Digital + Pantalla 10.2"</span>
+                <span>📅 Test Drive Gratis</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (type === 'charging') {
+        return `
+          <div class="rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 p-3.5 border border-amber-400/30 my-2.5 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-amber-300 flex items-center gap-1.5">⚡ Red Nova Charge — San Pedro Sula</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">GRATIS 1er Año</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-[11px]">
+              <div class="bg-slate-950/75 p-2.5 rounded-lg border border-slate-700/70">
+                <p class="font-bold text-white">📍 Zona Sur / Centro</p>
+                <p class="text-slate-400 text-[10px] mt-0.5">• Ave. Circunvalación</p>
+                <p class="text-slate-400 text-[10px]">• Multiplaza SPS</p>
+                <p class="text-slate-400 text-[10px]">• City Mall SPS</p>
+              </div>
+              <div class="bg-slate-950/75 p-2.5 rounded-lg border border-slate-700/70">
+                <p class="font-bold text-white">📍 Zona Norte / Oeste</p>
+                <p class="text-slate-400 text-[10px] mt-0.5">• Altara Lifestyle</p>
+                <p class="text-slate-400 text-[10px]">• Galerías del Valle</p>
+                <p class="text-slate-400 text-[10px]">• Blvd. del Norte</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return '';
+    }
+
+    // Genera el HTML de una encuesta interactiva
+    function getPollHTML(post) {
+      if (!post.poll) return '';
+      const { options, totalVotes, userVotedIndex } = post.poll;
+
+      const optionsHTML = options.map((opt, idx) => {
+        const percentage = totalVotes > 0 ? Math.round((opt.votes / totalVotes) * 100) : 0;
+        const isSelected = userVotedIndex === idx;
+
+        return `
+          <button onclick="votePoll('${post.id}', ${idx})" class="w-full text-left relative overflow-hidden rounded-xl border ${isSelected ? 'border-emerald-400 ring-1 ring-emerald-400/50' : 'border-slate-200 dark:border-slate-700/80'} bg-slate-50 dark:bg-slate-900/80 p-2.5 transition-all hover:border-emerald-400/70 cursor-pointer group">
+            <!-- Barra de progreso porcentual -->
+            <div class="absolute inset-y-0 left-0 ${isSelected ? 'bg-emerald-400/25' : 'bg-slate-200/70 dark:bg-slate-800/90'} transition-all duration-500" style="width: ${percentage}%"></div>
+            <div class="relative z-10 flex items-center justify-between gap-2 text-xs">
+              <span class="font-semibold ${isSelected ? 'text-emerald-700 dark:text-emerald-300' : 'text-slate-800 dark:text-slate-200'} flex items-center gap-1.5">
+                ${isSelected ? '<span class="w-4 h-4 rounded-full bg-emerald-400 text-slate-950 inline-flex items-center justify-center text-[10px] font-black">✓</span>' : '<span class="w-4 h-4 rounded-full border border-slate-400/60 inline-block"></span>'}
+                ${opt.label}
+              </span>
+              <span class="font-extrabold text-[11px] ${isSelected ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}">${percentage}%</span>
+            </div>
+          </button>
+        `;
+      }).join('');
+
+      return `
+        <div class="mt-2.5 space-y-2">
+          ${optionsHTML}
+          <p class="text-[10px] text-slate-400 font-medium pt-0.5">${totalVotes.toLocaleString('es-HN')} votos • Toca una opción para votar</p>
+        </div>
+      `;
+    }
+
+    // Renderiza todas las publicaciones en el feed
+    function renderPosts() {
+      const container = document.getElementById('postsContainer');
+      container.innerHTML = posts.map(post => {
+        const reactionsHTML = post.reactions.map(r => `
+          <button onclick="toggleReaction('${post.id}', '${r.emoji}')" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer active:scale-90 ${
+            r.userReacted
+              ? 'bg-emerald-500/20 dark:bg-emerald-400/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/50 animate-pop'
+              : 'bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/70 hover:bg-slate-200/70 dark:hover:bg-slate-700'
+          }">
+            <span>${r.emoji}</span>
+            <span class="text-[11px]">${formatCount(r.count)}</span>
+          </button>
+        `).join('');
+
+        const pickerOpen = state.openPickerPostId === post.id;
+        const quickPickerHTML = pickerOpen ? `
+          <div class="mt-2 p-1.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl flex items-center justify-between gap-1 animate-pop">
+            ${quickEmojis.map(emoji => `
+              <button onclick="toggleReaction('${post.id}', '${emoji}', true)" class="w-8 h-8 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center text-base transition-transform hover:scale-125 cursor-pointer">
+                ${emoji}
+              </button>
+            `).join('')}
+          </div>
+        ` : '';
+
+        return `
+          <article class="bg-white dark:bg-[#162235] rounded-2xl rounded-tl-sm p-3.5 shadow-sm border border-slate-200/80 dark:border-slate-800/90 transition-colors">
+            <!-- Cabecera interna de la publicación -->
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                ${post.tag}
+              </span>
+              <span class="text-[10px] text-slate-400 flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                ${post.views}
+              </span>
+            </div>
+
+            <!-- Título y cuerpo del mensaje -->
+            <h3 class="font-bold text-[13.5px] text-slate-900 dark:text-white leading-snug mb-1.5">
+              ${post.title}
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              ${post.body}
+            </p>
+
+            <!-- Tarjeta Visual o Encuesta -->
+            ${getVisualCardHTML(post.visualType)}
+            ${getPollHTML(post)}
+
+            <!-- Pie de publicación: Reacciones de clientes + Hora -->
+            <div class="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-end justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                ${reactionsHTML}
+                <!-- Botón (+) para abrir selector rápido de emojis -->
+                <button onclick="toggleEmojiPicker('${post.id}')" class="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500/20 text-slate-500 dark:text-slate-400 hover:text-emerald-400 flex items-center justify-center text-sm font-bold transition-colors cursor-pointer" title="Añadir reacción">
+                  +
+                </button>
+              </div>
+              <span class="text-[10px] text-slate-400 shrink-0 pb-0.5">${post.time}</span>
+            </div>
+
+            ${quickPickerHTML}
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Formatea contadores (ej. 1120 -> 1.1k o número exacto)
+    function formatCount(num) {
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace('.0', '') + 'k';
+      }
+      return num;
+    }
+
+    // Agrega o quita reacción de cliente en una publicación
+    function toggleReaction(postId, emoji, closePicker = false) {
+      const post = posts.find(p => p.id === postId);
+      if (!post) return;
+
+      const existing = post.reactions.find(r => r.emoji === emoji);
+      if (existing) {
+        if (existing.userReacted) {
+          existing.count = Math.max(0, existing.count - 1);
+          existing.userReacted = false;
+        } else {
+          existing.count += 1;
+          existing.userReacted = true;
+        }
+      } else {
+        post.reactions.push({ emoji, count: 1, userReacted: true });
+      }
+
+      if (closePicker) {
+        state.openPickerPostId = null;
+      }
+      renderPosts();
+    }
+
+    // Abre o cierra el selector rápido de reacciones (+)
+    function toggleEmojiPicker(postId) {
+      state.openPickerPostId = state.openPickerPostId === postId ? null : postId;
+      renderPosts();
+    }
+
+    // Votar en la encuesta del canal
+    function votePoll(postId, optionIndex) {
+      const post = posts.find(p => p.id === postId);
+      if (!post || !post.poll) return;
+
+      const prevIndex = post.poll.userVotedIndex;
+      if (prevIndex === optionIndex) return; // Ya votó por esta opción
+
+      if (prevIndex !== null) {
+        post.poll.options[prevIndex].votes -= 1;
+      } else {
+        post.poll.totalVotes += 1;
+      }
+
+      post.poll.options[optionIndex].votes += 1;
+      post.poll.userVotedIndex = optionIndex;
+
+      showPhoneToast('¡Voto registrado en el canal! ⚡');
+      renderPosts();
+    }
+
+    // Seguir / Dejar de seguir el canal
+    function toggleFollow() {
+      state.isFollowing = !state.isFollowing;
+      state.followers += state.isFollowing ? 1 : -1;
+
+      const btnFollow = document.getElementById('btnFollow');
+      const modalFollowers = document.getElementById('modalFollowers');
+      const modalFollowLabel = document.getElementById('modalFollowLabel');
+
+      modalFollowers.textContent = state.followers.toLocaleString('es-HN');
+
+      if (state.isFollowing) {
+        btnFollow.textContent = 'Siguiendo';
+        btnFollow.className = 'px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-emerald-400 border border-slate-300 dark:border-emerald-500/30';
+        modalFollowLabel.textContent = 'Siguiendo';
+        showPhoneToast('Ahora sigues a Nova Honduras ⚡');
+      } else {
+        btnFollow.textContent = 'Seguir';
+        btnFollow.className = 'px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer bg-emerald-400 text-slate-950 shadow-md shadow-emerald-500/20';
+        modalFollowLabel.textContent = 'Seguir';
+        showPhoneToast('Dejaste de seguir el canal');
+      }
+    }
+
+    // Activar / Silenciar notificaciones del canal
+    function toggleNotifications() {
+      state.notificationsEnabled = !state.notificationsEnabled;
+
+      const bellOn = document.getElementById('bellIconOn');
+      const bellOff = document.getElementById('bellIconOff');
+      const footerMuteBtn = document.getElementById('footerMuteBtn');
+      const modalNotifLabel = document.getElementById('modalNotifLabel');
+
+      if (state.notificationsEnabled) {
+        bellOn.classList.remove('hidden');
+        bellOff.classList.add('hidden');
+        footerMuteBtn.textContent = 'Silenciar';
+        modalNotifLabel.textContent = 'Activadas';
+        showPhoneToast('Notificaciones activadas 🔔');
+      } else {
+        bellOn.classList.add('hidden');
+        bellOff.classList.remove('hidden');
+        footerMuteBtn.textContent = 'Activar';
+        modalNotifLabel.textContent = 'Silenciadas';
+        showPhoneToast('Canal silenciado 🔕');
+      }
+    }
+
+    // Abrir / Cerrar vista de Perfil del Canal
+    function toggleChannelInfo(show) {
+      const modal = document.getElementById('channelInfoModal');
+      if (show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // Copiar enlace del canal usando fallback compatible con iframes
+    function copyChannelLink() {
+      const dummy = document.createElement('textarea');
+      dummy.value = 'https://novamotors.hn/canal-oficial';
+      document.body.appendChild(dummy);
+      dummy.select();
+      try {
+        document.execCommand('copy');
+        showPhoneToast('Enlace del canal copiado 🔗');
+      } catch (err) {
+        showPhoneToast('Enlace: novamotors.hn/canal');
+      }
+      document.body.removeChild(dummy);
+    }
+
+    // Alternar entre Modo Oscuro y Modo Claro dentro del canal
+    function toggleTheme() {
+      state.darkMode = !state.darkMode;
+      const phoneFrame = document.getElementById('phoneFrame');
+      const chatFeed = document.getElementById('chatFeed');
+      const sunIcon = document.getElementById('themeIconSun');
+      const moonIcon = document.getElementById('themeIconMoon');
+
+      if (state.darkMode) {
+        phoneFrame.classList.add('dark');
+        phoneFrame.classList.remove('bg-[#EFEAE2]');
+        phoneFrame.classList.add('bg-[#0B121D]');
+        chatFeed.classList.remove('chat-bg-light');
+        chatFeed.classList.add('chat-bg-dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+        showPhoneToast('Modo oscuro activado 🌙');
+      } else {
+        phoneFrame.classList.remove('dark');
+        phoneFrame.classList.remove('bg-[#0B121D]');
+        phoneFrame.classList.add('bg-[#EFEAE2]');
+        chatFeed.classList.remove('chat-bg-dark');
+        chatFeed.classList.add('chat-bg-light');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+        showPhoneToast('Modo claro activado ☀️');
+      }
+    }
+
+    // Mostrar notificación toast suave dentro del smartphone
+    let toastTimeout;
+    function showPhoneToast(msg) {
+      const toast = document.getElementById('phoneToast');
+      const toastText = document.getElementById('phoneToastText');
+      toastText.textContent = msg;
+
+      toast.classList.remove('opacity-0', '-translate-y-2');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', '-translate-y-2');
+      }, 2200);
+    }
+
+    // Inicialización al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPosts();
+    });
+  </script>
+</body>
+</html>
